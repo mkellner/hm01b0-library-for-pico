@@ -28,6 +28,8 @@ struct hm01b0_config {
 
     uint width;
     uint height;
+	uint flipx;
+	uint flipy;
 };
 
 int hm01b0_init(const struct hm01b0_config* config);

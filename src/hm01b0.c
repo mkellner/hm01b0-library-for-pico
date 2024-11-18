@@ -137,8 +137,13 @@ int hm01b0_init(const struct hm01b0_config* config)
     hm01b0_write_reg8(0x3010, qvga_win_en_val);
     hm01b0_write_reg16(0x0340, frame_length_lines_val);
     hm01b0_write_reg16(0x0342, line_length_pclk_val);
-    
-    hm01b0_write_reg8(0x0101, 3);
+
+	uint8_t val = 0;
+	if (config->flipx)
+		val |= 0b01;
+	if (config->flipy)
+		val |= 0b10;
+    hm01b0_write_reg8(0x0101, val);		// flip H and flip V
 
     hm01b0_write_reg8(0x3060, 0x08 | 0); // OSC_CLK_DIV
 
